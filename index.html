@@ -79,10 +79,13 @@
         $.getJSON("courses.json", function (json) {
             $.each(json, function (key, value) {
                 $('#courses').append('<option value="' + key + '">' + key + '</option>');
+                $('#sections').empty();
+                $('#classes').empty();
             });
 
             $('#courses').click(function () {
                 $('#sections').empty();
+                $('#classes').empty();
                 const sections = json[this.value];
                 $.each(sections, function (key, value) {
                     $('#sections').append('<option value="' + key + '">' + key + '</option>');

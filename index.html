@@ -77,10 +77,9 @@
 <script>
     $(document).ready(function () {
         $.getJSON("courses.json", function (json) {
+
             $.each(json, function (key, value) {
                 $('#courses').append('<option value="' + key + '">' + key + '</option>');
-                $('#sections').empty();
-                $('#classes').empty();
             });
 
             $('#courses').click(function () {
@@ -91,6 +90,7 @@
                     $('#sections').append('<option value="' + key + '">' + key + '</option>');
                 });
             });
+
             $('#sections').click(function () {
                 let courses = $('#courses').val();
                 let sections = $('#sections').val();
@@ -99,9 +99,6 @@
                     $('#classes').append('<option value="' + value + '">' + value + '</option>');
                 });
             });
-
-
-
 
             $('#submit').click(function (e) {
                 let courses = $('#courses').val();
@@ -132,7 +129,6 @@
                     }
                 });
             });
-
         });
     })
 </script>

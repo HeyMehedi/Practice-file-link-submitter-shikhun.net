@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Ping SMTP Project</title>
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="Md Mehedi Hasan">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <!-- Milligram CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <script defer src="https://feedback.fish/ff.js?pid=c7bcc140a0df41"></script>
+    <style type="text/css">
+        svg.icon {
+            max-width: 18px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        nav.nav {
+            text-align: center;
+        }
+    </style>
+
+    <!-- Pixel Code for https://app.proofnudge.com/ -->
+    <script async src="https://app.proofnudge.com/pixel/czqsvj9v4gg1rfijp5jovby8au422wbw"></script>
+    <!-- END Pixel Code -->
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="column column-60 column-offset-20">
+                <h2 class="text-center">Ping SMTP</h2>
+                <p class="text-center">A sample project to check SMTP</p>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="column column-60 column-offset-20">
+                <form method="POST" action="/smtp.php">
+
+                    <label for="courses">Course Name</label>
+                    <select id="courses">
+                    </select>
+
+                    <label for="sections">Section Name</label>
+                    <select id="sections">
+                    </select>
+
+                    <label for="classes">Class Name</label>
+                    <select id="classes">
+                    </select>
+
+
+                    <label for="url">URL</label>
+                    <input id="url" type="url" name="url" placeholder="https://........." value="">
+
+                    <label for="email">Your email</label>
+                    <input id="email" type="email" name="email" placeholder="joe@example.net" value="">
+
+
+                    <button id="submit" type="submit" style="width: 100%" name="submit">Ping Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $.getJSON("courses.json", function (json) {
+            $.each(json, function (key, value) {
+                $('#courses').append('<option value="' + key + '">' + key + '</option>');
+            });
+
+            $('#courses').click(function () {
+                $('#sections').empty();
+                const sections = json[this.value];
+                $.each(sections, function (key, value) {
+                    $('#sections').append('<option value="' + key + '">' + key + '</option>');
+                });
+            });
+            $('#sections').click(function () {
+                let courses = $('#courses').val();
+                let sections = $('#sections').val();
+                $('#classes').empty();
+                $.each(json[courses][sections], function (key, value) {
+                    $('#classes').append('<option value="' + value + '">' + value + '</option>');
+                });
+            });
+
+
+
+
+            $('#submit').click(function (e) {
+                let courses = $('#courses').val();
+                let sections = $('#sections').val();
+                let classes = $('#classes').val();
+                let url = $('#url').val();
+                let email = $('#email').val();
+                e.preventDefault();
+
+                alert(courses + sections + classes)
+                $.ajax({
+                    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd6pzy-Myp8n6L6qA3Z73gnDVTOMTYJM44YPR8E6Gr6qvZZyg/formResponse",
+                    data: {
+                        "entry.304758647": courses,
+                        "entry.1670364122": sections,
+                        "entry.369605134": classes,
+                        "entry.1821377370": url,
+                        "entry.1230883365": email
+                    },
+                    type: "POST",
+                    dataType: "xml",
+                    statusCode: {
+                        0: function () {
+                            alert('Done');
+                        },
+                        200: function () {
+                            alert('Done');
+
+                        }
+                    }
+                });
+            })
+
+
+        });
+    })
+
+
+
+
+
+</script>
+
+</html>

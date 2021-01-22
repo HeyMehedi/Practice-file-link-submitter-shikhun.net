@@ -25,11 +25,12 @@
         nav.nav {
             text-align: center;
         }
-    </style>
 
-    <!-- Pixel Code for https://app.proofnudge.com/ -->
-    <script async src="https://app.proofnudge.com/pixel/czqsvj9v4gg1rfijp5jovby8au422wbw"></script>
-    <!-- END Pixel Code -->
+        .success {
+            color: #9b4dca;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -45,7 +46,6 @@
         <div class="row">
             <div class="column column-60 column-offset-20">
                 <form method="POST" action="/smtp.php">
-
                     <label for="courses">Course Name</label>
                     <select id="courses">
                     </select>
@@ -66,15 +66,15 @@
                     <input id="email" type="email" name="email" placeholder="joe@example.net" value="">
 
 
-                    <button id="submit" type="submit" style="width: 100%" name="submit">Ping Now</button>
+                    <button id="submit" type="submit" style="width: 100%" name="submit">Submit</button>
                 </form>
+                <p class="success"></p>
             </div>
         </div>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-
     $(document).ready(function () {
         $.getJSON("courses.json", function (json) {
             $.each(json, function (key, value) {
@@ -107,8 +107,6 @@
                 let url = $('#url').val();
                 let email = $('#email').val();
                 e.preventDefault();
-
-                alert(courses + sections + classes)
                 $.ajax({
                     url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd6pzy-Myp8n6L6qA3Z73gnDVTOMTYJM44YPR8E6Gr6qvZZyg/formResponse",
                     data: {
@@ -122,24 +120,18 @@
                     dataType: "xml",
                     statusCode: {
                         0: function () {
-                            alert('Done');
+                            $('.success').append("You have successfully submitted your link!");
                         },
                         200: function () {
-                            alert('Done');
-
+                            $('#success').empty();
+                            $('.success').append("You have successfully submitted your link!");
                         }
                     }
                 });
-            })
-
+            });
 
         });
     })
-
-
-
-
-
 </script>
 
 </html>

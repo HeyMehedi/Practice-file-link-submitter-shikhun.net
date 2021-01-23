@@ -62,8 +62,8 @@
                     <label for="url">URL</label>
                     <input id="url" type="url" name="url" placeholder="https://........." value="">
 
-                    <label for="email">Your email</label>
-                    <input id="email" type="email" name="email" placeholder="joe@example.net" value="">
+                    <!-- <label for="email">Your email</label>
+                    <input id="email" type="email" name="email" placeholder="joe@example.net" value=""> -->
 
 
                     <button id="submit" type="submit" style="width: 100%" name="submit">Submit</button>
@@ -105,7 +105,7 @@
                 let sections = $('#sections').val();
                 let classes = $('#classes').val();
                 let url = $('#url').val();
-                let email = $('#email').val();
+                // let email = $('#email').val();
                 e.preventDefault();
                 $.ajax({
                     url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd6pzy-Myp8n6L6qA3Z73gnDVTOMTYJM44YPR8E6Gr6qvZZyg/formResponse",
@@ -114,7 +114,7 @@
                         "entry.1670364122": sections,
                         "entry.369605134": classes,
                         "entry.1821377370": url,
-                        "entry.1230883365": email
+                        // "entry.1230883365": email
                     },
                     type: "POST",
                     dataType: "xml",
